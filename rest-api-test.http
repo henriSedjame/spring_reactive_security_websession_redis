@@ -1,0 +1,16 @@
+POST http://localhost:8080/login/user/user
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/webSession2
+Content-Type: application/json
+Authorization: user
+
+###
+
+GET http://localhost:8080/logout
+Content-Type: application/json
+Authorization: user
+
+###
