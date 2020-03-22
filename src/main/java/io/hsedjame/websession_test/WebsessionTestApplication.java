@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebSession;
+import org.springframework.web.server.session.HeaderWebSessionIdResolver;
 import reactor.core.publisher.Mono;
 
 import javax.script.ScriptEngine;
@@ -53,8 +54,17 @@ public class WebsessionTestApplication {
 
 @EnableRedisWebSession
 class RedisConfig {
+
+    @Bean
     public LettuceConnectionFactory redisConnectionFactory() {
         return new LettuceConnectionFactory();
+    }
+
+    //@Bean
+    HeaderWebSessionIdResolver headerWebSessionIdResolver() {
+        final HeaderWebSessionIdResolver resolver = new HeaderWebSessionIdResolver();
+        resolver.setHeaderName("CURRENT_SESSION");
+        return resolver;
     }
 }
 
